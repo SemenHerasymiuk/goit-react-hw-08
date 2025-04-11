@@ -5,7 +5,7 @@ import { Layout } from './components/Layout/Layout';
 import { PrivateRoute } from './components/PrivateRoute/PrivateRoute';
 import { RestrictedRoute } from './components/RestrictedRoute/RestrictedRoute';
 import { refreshUser } from './redux/auth/operations';
-import { useAuth } from './hooks';
+import { useAuth } from './hooks/useAuth';
 import { Toaster } from 'react-hot-toast';
 
 const HomePage = lazy(() => import('./pages/Home/Home'));
