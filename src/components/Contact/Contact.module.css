@@ -1,0 +1,129 @@
+.contact {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.contact:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.info {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.name,
+.number {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
+  color: #2c3e50;
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+  color: #95a5a6;
+}
+
+.name .icon {
+  color: #3498db;
+}
+
+.number .icon {
+  color: #2ecc71;
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+}
+
+.input {
+  padding: 8px;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.buttonEdit,
+.buttonDelete,
+.buttonSave,
+.buttonCancel {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s;
+}
+
+.buttonEdit {
+  background-color: #3498db;
+  color: white;
+}
+
+.buttonEdit:hover {
+  background-color: #2980b9;
+}
+
+.buttonDelete {
+  background-color: #e74c3c;
+  color: white;
+}
+
+.buttonDelete:hover {
+  background-color: #c0392b;
+}
+
+.buttonSave {
+  background-color: #2ecc71;
+  color: white;
+}
+
+.buttonSave:hover {
+  background-color: #27ae60;
+}
+
+.buttonCancel {
+  background-color: #95a5a6;
+  color: white;
+}
+
+.buttonCancel:hover {
+  background-color: #7f8c8d;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modalContent {
+  background-color: white;
+  padding: 24px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.modalActions {
+  margin-top: 16px;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
