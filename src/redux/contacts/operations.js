@@ -2,30 +2,19 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 
-axios.defaults.baseURL = 'https://connections-api.goit.global';
-
-const setAuthHeader = token => {
-  axios.defaults.headers.common.Authorization = `Bearer ${token}`;
-};
-
-const clearAuthHeader = () => {
-  axios.defaults.headers.common.Authorization = '';
-};
+const contactsInstance = axios.create({
+  baseURL: 'https://connections-api.goit.global'
+});
 
 export const fetchContacts = createAsyncThunk(
   'contacts/fetchAll',
   async (_, thunkAPI) => {
-    const state = thunkAPI.getState();
-    const token = state.auth.token;
-    
-    if (token) {
-      setAuthHeader(token);
-    } else {
-      clearAuthHeader();
-    }
-
     try {
-      const response = await axios.get('/contacts');
+      const response = await contactsInstance.get('/contacts', {
+        headers: {
+          Authorization: `Bearer ${thunkAPI.getState().auth.token}`
+        }
+      });
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -36,17 +25,12 @@ export const fetchContacts = createAsyncThunk(
 export const addContact = createAsyncThunk(
   'contacts/addContact',
   async (contact, thunkAPI) => {
-    const state = thunkAPI.getState();
-    const token = state.auth.token;
-    
-    if (token) {
-      setAuthHeader(token);
-    } else {
-      clearAuthHeader();
-    }
-
     try {
-      const response = await axios.post('/contacts', contact);
+      const response = await contactsInstance.post('/contacts', contact, {
+        headers: {
+          Authorization: `Bearer ${thunkAPI.getState().auth.token}`
+        }
+      });
       toast.success('Contact added successfully');
       return response.data;
     } catch (error) {
@@ -59,17 +43,12 @@ export const addContact = createAsyncThunk(
 export const updateContact = createAsyncThunk(
   'contacts/updateContact',
   async ({ id, ...contact }, thunkAPI) => {
-    const state = thunkAPI.getState();
-    const token = state.auth.token;
-    
-    if (token) {
-      setAuthHeader(token);
-    } else {
-      clearAuthHeader();
-    }
-
     try {
-      const response = await axios.patch(`/contacts/${id}`, contact);
+      const response = await contactsInstance.patch(`/contacts/${id}`, contact, {
+        headers: {
+          Authorization: `Bearer ${thunkAPI.getState().auth.token}`
+        }
+      });
       toast.success('Contact updated successfully');
       return response.data;
     } catch (error) {
@@ -82,17 +61,12 @@ export const updateContact = createAsyncThunk(
 export const deleteContact = createAsyncThunk(
   'contacts/deleteContact',
   async (contactId, thunkAPI) => {
-    const state = thunkAPI.getState();
-    const token = state.auth.token;
-    
-    if (token) {
-      setAuthHeader(token);
-    } else {
-      clearAuthHeader();
-    }
-
     try {
-      const response = await axios.delete(`/contacts/${contactId}`);
+      const response = await contactsInstance.delete(`/contacts/${contactId}`, {
+        headers: {
+          Authorization: `Bearer ${thunkAPI.getState().auth.token}`
+        }
+      });
       toast.success('Contact deleted successfully');
       return response.data;
     } catch (error) {
