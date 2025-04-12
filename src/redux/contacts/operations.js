@@ -2,15 +2,13 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 
-const contactsInstance = axios.create({
-  baseURL: 'https://connections-api.goit.global'
-});
+const BASE_URL = 'https://connections-api.goit.global';
 
 export const fetchContacts = createAsyncThunk(
   'contacts/fetchAll',
   async (_, thunkAPI) => {
     try {
-      const response = await contactsInstance.get('/contacts', {
+      const response = await axios.get(`${BASE_URL}/contacts`, {
         headers: {
           Authorization: `Bearer ${thunkAPI.getState().auth.token}`
         }
@@ -26,7 +24,7 @@ export const addContact = createAsyncThunk(
   'contacts/addContact',
   async (contact, thunkAPI) => {
     try {
-      const response = await contactsInstance.post('/contacts', contact, {
+      const response = await axios.post(`${BASE_URL}/contacts`, contact, {
         headers: {
           Authorization: `Bearer ${thunkAPI.getState().auth.token}`
         }
@@ -44,7 +42,7 @@ export const updateContact = createAsyncThunk(
   'contacts/updateContact',
   async ({ id, ...contact }, thunkAPI) => {
     try {
-      const response = await contactsInstance.patch(`/contacts/${id}`, contact, {
+      const response = await axios.patch(`${BASE_URL}/contacts/${id}`, contact, {
         headers: {
           Authorization: `Bearer ${thunkAPI.getState().auth.token}`
         }
@@ -62,7 +60,7 @@ export const deleteContact = createAsyncThunk(
   'contacts/deleteContact',
   async (contactId, thunkAPI) => {
     try {
-      const response = await contactsInstance.delete(`/contacts/${contactId}`, {
+      const response = await axios.delete(`${BASE_URL}/contacts/${contactId}`, {
         headers: {
           Authorization: `Bearer ${thunkAPI.getState().auth.token}`
         }
